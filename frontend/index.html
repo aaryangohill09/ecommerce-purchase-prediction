@@ -1,696 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>E-Commerce AI | Purchase Prediction</title>
-
-    <link rel="stylesheet" href="style.css">
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Commerce Purchase Prediction</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-
 <body>
+  <aside class="sidebar">
+    <div class="brand">E-Commerce<span>AI</span></div>
+    <nav>
+      <a href="#overview">Overview</a>
+      <a href="#prediction">Prediction</a>
+      <a href="#analytics">Analytics</a>
+      <a href="#insights">Insights</a>
+    </nav>
+    <div class="sidebar-note">
+      <small>Internship Project</small>
+      <strong>Customer Behavior & Purchase Prediction</strong>
+    </div>
+  </aside>
 
-    <!-- SIDEBAR -->
+  <main class="main">
+    <section id="overview" class="hero">
+      <div>
+        <span class="eyebrow">DATA SCIENCE DASHBOARD</span>
+        <h1>Understand customers.<br><span>Predict purchases.</span></h1>
+        <p>Analyze customer sessions and estimate the probability of a purchase using machine learning.</p>
+        <a class="primary" href="#prediction">Try Prediction</a>
+      </div>
+      <div class="hero-card">
+        <div class="hero-icon">◎</div>
+        <strong>ML-powered</strong>
+        <span>Purchase probability</span>
+      </div>
+    </section>
 
-    <aside class="sidebar">
+    <section class="kpi-grid">
+      <article class="kpi"><span>Total Sessions</span><strong id="totalSessions">—</strong></article>
+      <article class="kpi"><span>Purchase Rate</span><strong id="purchaseRate">—</strong></article>
+      <article class="kpi"><span>Avg. Session</span><strong id="avgSession">—</strong></article>
+      <article class="kpi"><span>Avg. Pages</span><strong id="avgPages">—</strong></article>
+    </section>
 
-        <div class="brand">
-
-            <div class="brand-mark">
-                EA
-            </div>
-
-            <div>
-                <strong>E-Commerce AI</strong>
-                <small>Customer Intelligence</small>
-            </div>
-
+    <section id="prediction" class="panel prediction-panel">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">PREDICTION</span>
+          <h2>Predict purchase probability</h2>
+          <p>Enter session information and let the trained model estimate conversion likelihood.</p>
         </div>
+      </div>
 
+      <div class="prediction-layout">
+        <form id="predictionForm" class="form-grid">
+          <label>Device Type
+            <select id="device_type">
+              <option>Desktop</option>
+              <option>Mobile</option>
+              <option>Tablet</option>
+            </select>
+          </label>
+          <label>Traffic Source
+            <select id="traffic_source">
+              <option>Organic</option>
+              <option>Paid</option>
+              <option>Social</option>
+              <option>Direct</option>
+              <option>Referral</option>
+            </select>
+          </label>
+          <label>Pages Viewed
+            <input id="pages_viewed" type="number" min="0" step="1" value="8" required>
+          </label>
+          <label>Session Duration
+            <input id="session_duration" type="number" min="0" step="0.1" value="15" required>
+          </label>
+          <label>Previous Purchases
+            <input id="previous_purchases" type="number" min="0" step="1" value="1" required>
+          </label>
+          <button class="primary" type="submit">Predict Purchase</button>
+        </form>
 
-        <nav>
-
-            <a href="#overview" class="nav-link active">
-                Overview
-            </a>
-
-            <a href="#prediction" class="nav-link">
-                Prediction
-            </a>
-
-            <a href="#analytics" class="nav-link">
-                Analytics
-            </a>
-
-            <a href="#insights" class="nav-link">
-                Insights
-            </a>
-
-        </nav>
-
-
-        <div class="sidebar-note">
-
-            <span>●</span>
-            ML System Ready
-
+        <div class="result-card">
+          <span>Purchase Probability</span>
+          <strong id="probability">—%</strong>
+          <div class="meter"><div id="meterFill"></div></div>
+          <p id="predictionLabel">Enter customer session details.</p>
         </div>
-
-    </aside>
-
-
-
-    <!-- MAIN -->
-
-    <main class="main">
-
-
-        <!-- TOPBAR -->
-
-        <header class="topbar">
-
-            <div>
-
-                <p class="eyebrow">
-                    CUSTOMER BEHAVIOR ANALYTICS
-                </p>
-
-                <h1>
-                    Purchase Prediction Dashboard
-                </h1>
-
-            </div>
-
-
-            <button
-                id="refreshBtn"
-                class="ghost-btn"
-            >
-                Refresh Analytics
-            </button>
-
-        </header>
-
-
-
-        <!-- OVERVIEW -->
-
-        <section
-            id="overview"
-            class="section"
-        >
-
-            <div class="hero-card">
-
-                <div>
-
-                    <span class="pill">
-                        AI-POWERED E-COMMERCE
-                    </span>
-
-
-                    <h2>
-
-                        Understand customers.
-                        <br>
-
-                        <span>
-                            Predict purchases.
-                        </span>
-
-                    </h2>
-
-
-                    <p>
-
-                        Use customer session behavior,
-                        traffic source, device information
-                        and previous purchases to estimate
-                        purchase probability.
-
-                    </p>
-
-
-                    <a
-                        href="#prediction"
-                        class="primary-btn"
-                    >
-                        Make a Prediction →
-                    </a>
-
-                </div>
-
-
-                <div class="hero-orb">
-
-                    <div class="orb-inner">
-
-                        ML
-
-                        <br>
-
-                        <small>
-                            MODEL
-                        </small>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- KPI -->
-
-            <div class="kpi-grid">
-
-
-                <div class="kpi">
-
-                    <span>
-                        Total Sessions
-                    </span>
-
-                    <strong id="totalSessions">
-                        —
-                    </strong>
-
-                    <small>
-                        Dataset records
-                    </small>
-
-                </div>
-
-
-
-                <div class="kpi">
-
-                    <span>
-                        Purchase Rate
-                    </span>
-
-                    <strong id="purchaseRate">
-                        —
-                    </strong>
-
-                    <small>
-                        Observed conversion
-                    </small>
-
-                </div>
-
-
-
-                <div class="kpi">
-
-                    <span>
-                        Avg. Session
-                    </span>
-
-                    <strong id="avgDuration">
-                        —
-                    </strong>
-
-                    <small>
-                        Minutes
-                    </small>
-
-                </div>
-
-
-
-                <div class="kpi">
-
-                    <span>
-                        Avg. Pages
-                    </span>
-
-                    <strong id="avgPages">
-                        —
-                    </strong>
-
-                    <small>
-                        Per session
-                    </small>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- PREDICTION -->
-
-        <section
-            id="prediction"
-            class="section"
-        >
-
-            <div class="section-title">
-
-                <p class="eyebrow">
-                    PREDICTION ENGINE
-                </p>
-
-                <h2>
-                    Predict a customer's purchase probability
-                </h2>
-
-                <p>
-                    Enter a customer session profile and
-                    let the trained classification model
-                    estimate the outcome.
-                </p>
-
-            </div>
-
-
-
-            <div class="prediction-layout">
-
-
-                <!-- FORM -->
-
-                <form
-                    id="predictionForm"
-                    class="panel"
-                >
-
-                    <div class="form-grid">
-
-
-                        <label>
-
-                            Device Type
-
-                            <select
-                                id="device_type"
-                                required
-                            >
-
-                                <option value="">
-                                    Select device
-                                </option>
-
-                                <option value="Desktop">
-                                    Desktop
-                                </option>
-
-                                <option value="Mobile">
-                                    Mobile
-                                </option>
-
-                                <option value="Tablet">
-                                    Tablet
-                                </option>
-
-                            </select>
-
-                        </label>
-
-
-
-                        <label>
-
-                            Traffic Source
-
-                            <select
-                                id="traffic_source"
-                                required
-                            >
-
-                                <option value="">
-                                    Select source
-                                </option>
-
-                                <option value="Organic">
-                                    Organic
-                                </option>
-
-                                <option value="Paid">
-                                    Paid
-                                </option>
-
-                                <option value="Social">
-                                    Social
-                                </option>
-
-                                <option value="Direct">
-                                    Direct
-                                </option>
-
-                                <option value="Referral">
-                                    Referral
-                                </option>
-
-                            </select>
-
-                        </label>
-
-
-
-                        <label>
-
-                            Pages Viewed
-
-                            <input
-                                id="pages_viewed"
-                                type="number"
-                                min="1"
-                                max="100"
-                                placeholder="e.g. 12"
-                                required
-                            >
-
-                        </label>
-
-
-
-                        <label>
-
-                            Session Duration
-
-                            <input
-                                id="session_duration"
-                                type="number"
-                                min="0"
-                                max="300"
-                                step="0.1"
-                                placeholder="e.g. 18.5"
-                                required
-                            >
-
-                            <small>
-                                Duration in minutes
-                            </small>
-
-                        </label>
-
-
-
-                        <label>
-
-                            Previous Purchases
-
-                            <input
-                                id="previous_purchases"
-                                type="number"
-                                min="0"
-                                max="100"
-                                placeholder="e.g. 3"
-                                required
-                            >
-
-                        </label>
-
-                    </div>
-
-
-
-                    <button
-                        class="primary-btn full"
-                        type="submit"
-                    >
-
-                        Predict Purchase Probability
-
-                    </button>
-
-
-                    <p
-                        id="formStatus"
-                        class="form-status"
-                    ></p>
-
-                </form>
-
-
-
-                <!-- RESULT -->
-
-                <div class="panel result-panel">
-
-                    <div class="result-badge">
-                        PREDICTION
-                    </div>
-
-
-                    <div
-                        id="resultIcon"
-                        class="result-icon"
-                    >
-                        AI
-                    </div>
-
-
-                    <h3 id="resultTitle">
-
-                        Waiting for customer data
-
-                    </h3>
-
-
-
-                    <div class="probability">
-
-                        <span id="probability">
-                            —
-                        </span>
-
-                        <small>
-                            purchase probability
-                        </small>
-
-                    </div>
-
-
-
-                    <div class="meter">
-
-                        <div
-                            id="meterFill"
-                        ></div>
-
-                    </div>
-
-
-
-                    <p id="resultMessage">
-
-                        Submit the form to generate
-                        a model prediction.
-
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- ANALYTICS -->
-
-        <section
-            id="analytics"
-            class="section"
-        >
-
-            <div class="section-title">
-
-                <p class="eyebrow">
-                    DATA EXPLORATION
-                </p>
-
-                <h2>
-                    Customer behavior analytics
-                </h2>
-
-                <p>
-                    Charts are generated from the
-                    dataset served by the backend.
-                </p>
-
-            </div>
-
-
-
-            <div class="chart-grid">
-
-
-                <div class="panel chart-panel">
-
-                    <h3>
-                        Purchase Rate by Device
-                    </h3>
-
-                    <canvas
-                        id="deviceChart"
-                    ></canvas>
-
-                </div>
-
-
-
-                <div class="panel chart-panel">
-
-                    <h3>
-                        Purchase Rate by Traffic Source
-                    </h3>
-
-                    <canvas
-                        id="trafficChart"
-                    ></canvas>
-
-                </div>
-
-
-
-                <div class="panel chart-panel wide">
-
-                    <h3>
-                        Session Duration vs Pages Viewed
-                    </h3>
-
-                    <canvas
-                        id="scatterChart"
-                    ></canvas>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- INSIGHTS -->
-
-        <section
-            id="insights"
-            class="section"
-        >
-
-            <div class="section-title">
-
-                <p class="eyebrow">
-                    BUSINESS INTERPRETATION
-                </p>
-
-                <h2>
-                    Customer behavior insights
-                </h2>
-
-            </div>
-
-
-
-            <div class="insight-grid">
-
-
-                <article class="insight-card">
-
-                    <b>
-                        ENGAGEMENT
-                    </b>
-
-                    <h3>
-                        Which sessions show stronger intent?
-                    </h3>
-
-                    <p>
-                        Compare pages viewed and session
-                        duration to identify highly engaged
-                        customer sessions.
-                    </p>
-
-                </article>
-
-
-
-                <article class="insight-card">
-
-                    <b>
-                        ACQUISITION
-                    </b>
-
-                    <h3>
-                        Which traffic sources convert?
-                    </h3>
-
-                    <p>
-                        Compare observed purchase rates
-                        across different acquisition channels.
-                    </p>
-
-                </article>
-
-
-
-                <article class="insight-card">
-
-                    <b>
-                        RETENTION
-                    </b>
-
-                    <h3>
-                        How does purchase history matter?
-                    </h3>
-
-                    <p>
-                        Previous purchasing behavior can be
-                        used as an important predictive feature.
-                    </p>
-
-                </article>
-
-
-
-                <article class="insight-card">
-
-                    <b>
-                        TARGETING
-                    </b>
-
-                    <h3>
-                        Where can predictions help?
-                    </h3>
-
-                    <p>
-                        Prediction scores can support customer
-                        prioritization and engagement decisions.
-                    </p>
-
-                </article>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- FOOTER -->
-
-        <footer>
-
-            © 2026 E-Commerce AI
-            · Customer Behavior & Purchase Prediction
-
-        </footer>
-
-
-    </main>
-
-
-    <script src="script.js"></script>
-
+      </div>
+    </section>
+
+    <section id="analytics">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">ANALYTICS</span>
+          <h2>Customer behavior patterns</h2>
+        </div>
+        <button id="refreshBtn" class="secondary">Refresh Data</button>
+      </div>
+
+      <div class="chart-grid">
+        <article class="panel chart-card"><h3>Purchase Rate by Device</h3><canvas id="deviceChart"></canvas></article>
+        <article class="panel chart-card"><h3>Purchase Rate by Traffic Source</h3><canvas id="trafficChart"></canvas></article>
+        <article class="panel chart-card wide"><h3>Pages Viewed vs Session Duration</h3><canvas id="scatterChart"></canvas></article>
+      </div>
+    </section>
+
+    <section id="insights">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">BUSINESS INTERPRETATION</span>
+          <h2>What the data can tell a business</h2>
+        </div>
+      </div>
+      <div class="insight-grid">
+        <article class="insight-card"><b>ENGAGEMENT</b><h3>High-intent sessions</h3><p>Pages viewed and session duration help identify sessions showing stronger engagement.</p></article>
+        <article class="insight-card"><b>ACQUISITION</b><h3>Which channels convert?</h3><p>Compare observed purchase rates across traffic sources to understand acquisition performance.</p></article>
+        <article class="insight-card"><b>RETENTION</b><h3>Why purchase history matters</h3><p>Previous purchasing behavior can provide useful predictive information for future conversion.</p></article>
+        <article class="insight-card"><b>TARGETING</b><h3>Where predictions help</h3><p>High-probability sessions can support personalized offers, remarketing and sales prioritization.</p></article>
+      </div>
+    </section>
+
+    <footer> E-Commerce Customer Behavior & Purchase Prediction · Internship Project</footer>
+  </main>
+
+  <script src="script.js"></script>
 </body>
-
 </html>

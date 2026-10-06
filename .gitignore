@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+venv/
+.venv/
+.env
+
+# Model / generated files
+backend/model/*.pkl
+reports/*.json
+reports/figures/*.png
+
+# Data outputs
+data/processed/*.csv
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
