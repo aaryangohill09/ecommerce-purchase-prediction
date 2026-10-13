@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,8 +18,8 @@
       <a href="#insights">Insights</a>
     </nav>
     <div class="sidebar-note">
-      <small>Internship Project</small>
-      <strong>Customer Behavior & Purchase Prediction</strong>
+      <small>Public Dataset</small>
+      <strong>Online Shoppers Purchasing Intention</strong>
     </div>
   </aside>
 
@@ -27,7 +28,7 @@
       <div>
         <span class="eyebrow">DATA SCIENCE DASHBOARD</span>
         <h1>Understand customers.<br><span>Predict purchases.</span></h1>
-        <p>Analyze customer sessions and estimate the probability of a purchase using machine learning.</p>
+        <p>Explore online shopping sessions and estimate purchase probability using machine learning.</p>
         <a class="primary" href="#prediction">Try Prediction</a>
       </div>
       <div class="hero-card">
@@ -40,8 +41,8 @@
     <section class="kpi-grid">
       <article class="kpi"><span>Total Sessions</span><strong id="totalSessions">—</strong></article>
       <article class="kpi"><span>Purchase Rate</span><strong id="purchaseRate">—</strong></article>
-      <article class="kpi"><span>Avg. Session</span><strong id="avgSession">—</strong></article>
-      <article class="kpi"><span>Avg. Pages</span><strong id="avgPages">—</strong></article>
+      <article class="kpi"><span>Administrative Duration</span><strong id="avgSession">—</strong></article>
+      <article class="kpi"><span>Product Pages Viewed</span><strong id="avgPages">—</strong></article>
     </section>
 
     <section id="prediction" class="panel prediction-panel">
@@ -49,46 +50,81 @@
         <div>
           <span class="eyebrow">PREDICTION</span>
           <h2>Predict purchase probability</h2>
-          <p>Enter session information and let the trained model estimate conversion likelihood.</p>
+          <p>Enter values for the actual features used by the model.</p>
         </div>
       </div>
+      <form id="predictionForm" class="form-grid">
+        <label>Administrative
+          <input id="Administrative" type="number" min="0" step="1" value="0" required>
+        </label>
+        <label>Administrative Duration
+          <input id="Administrative_Duration" type="number" min="0" step="any" value="0" required>
+        </label>
+        <label>Informational
+          <input id="Informational" type="number" min="0" step="1" value="0" required>
+        </label>
+        <label>Informational Duration
+          <input id="Informational_Duration" type="number" min="0" step="any" value="0" required>
+        </label>
+        <label>Product Related
+          <input id="ProductRelated" type="number" min="0" step="1" value="1" required>
+        </label>
+        <label>Product Related Duration
+          <input id="ProductRelated_Duration" type="number" min="0" step="any" value="0" required>
+        </label>
+        <label>Bounce Rate
+          <input id="BounceRates" type="number" min="0" max="1" step="any" value="0.02" required>
+        </label>
+        <label>Exit Rate
+          <input id="ExitRates" type="number" min="0" max="1" step="any" value="0.03" required>
+        </label>
+        <label>Page Value
+          <input id="PageValues" type="number" min="0" step="any" value="0" required>
+        </label>
+        <label>Special Day
+          <input id="SpecialDay" type="number" min="0" max="1" step="any" value="0" required>
+        </label>
+        <label>Month
+          <select id="Month">
+            <option>Feb</option><option>Mar</option><option>May</option>
+            <option>June</option><option>Jul</option><option>Aug</option>
+            <option>Sep</option><option>Oct</option><option>Nov</option>
+            <option>Dec</option
+          ></select>
+        </label>
+        <label>Operating Systems
+          <input id="OperatingSystems" type="number" min="1" value="2" required>
+        </label>
+        <label>Browser
+          <input id="Browser" type="number" min="1" value="2" required>
+        </label>
+        <label>Region
+          <input id="Region" type="number" min="1" value="1" required>
+        </label>
+        <label>Traffic Type
+          <input id="TrafficType" type="number" min="1" value="2" required>
+        </label>
+        <label>Visitor Type
+          <select id="VisitorType">
+            <option>Returning_Visitor</option>
+            <option>New_Visitor</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <label>Weekend
+          <select id="Weekend">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+          </select>
+        </label>
+        <button class="primary" type="submit">Predict Purchase</button>
+      </form>
 
-      <div class="prediction-layout">
-        <form id="predictionForm" class="form-grid">
-          <label>Device Type
-            <select id="device_type">
-              <option>Desktop</option>
-              <option>Mobile</option>
-              <option>Tablet</option>
-            </select>
-          </label>
-          <label>Traffic Source
-            <select id="traffic_source">
-              <option>Organic</option>
-              <option>Paid</option>
-              <option>Social</option>
-              <option>Direct</option>
-              <option>Referral</option>
-            </select>
-          </label>
-          <label>Pages Viewed
-            <input id="pages_viewed" type="number" min="0" step="1" value="8" required>
-          </label>
-          <label>Session Duration
-            <input id="session_duration" type="number" min="0" step="0.1" value="15" required>
-          </label>
-          <label>Previous Purchases
-            <input id="previous_purchases" type="number" min="0" step="1" value="1" required>
-          </label>
-          <button class="primary" type="submit">Predict Purchase</button>
-        </form>
-
-        <div class="result-card">
-          <span>Purchase Probability</span>
-          <strong id="probability">—%</strong>
-          <div class="meter"><div id="meterFill"></div></div>
-          <p id="predictionLabel">Enter customer session details.</p>
-        </div>
+      <div class="result-card">
+        <span>Purchase Probability</span>
+        <strong id="probability">—%</strong>
+        <div class="meter"><div id="meterFill"></div></div>
+        <p id="predictionLabel">Enter session details to begin.</p>
       </div>
     </section>
 
@@ -100,11 +136,10 @@
         </div>
         <button id="refreshBtn" class="secondary">Refresh Data</button>
       </div>
-
       <div class="chart-grid">
-        <article class="panel chart-card"><h3>Purchase Rate by Device</h3><canvas id="deviceChart"></canvas></article>
-        <article class="panel chart-card"><h3>Purchase Rate by Traffic Source</h3><canvas id="trafficChart"></canvas></article>
-        <article class="panel chart-card wide"><h3>Pages Viewed vs Session Duration</h3><canvas id="scatterChart"></canvas></article>
+        <article class="panel chart-card"><h3>Purchase Rate by Visitor Type</h3><canvas id="deviceChart"></canvas></article>
+        <article class="panel chart-card"><h3>Purchase Rate by Month</h3><canvas id="trafficChart"></canvas></article>
+        <article class="panel chart-card wide"><h3>Product Pages vs Product Duration</h3><canvas id="scatterChart"></canvas></article>
       </div>
     </section>
 
@@ -116,16 +151,15 @@
         </div>
       </div>
       <div class="insight-grid">
-        <article class="insight-card"><b>ENGAGEMENT</b><h3>High-intent sessions</h3><p>Pages viewed and session duration help identify sessions showing stronger engagement.</p></article>
-        <article class="insight-card"><b>ACQUISITION</b><h3>Which channels convert?</h3><p>Compare observed purchase rates across traffic sources to understand acquisition performance.</p></article>
-        <article class="insight-card"><b>RETENTION</b><h3>Why purchase history matters</h3><p>Previous purchasing behavior can provide useful predictive information for future conversion.</p></article>
-        <article class="insight-card"><b>TARGETING</b><h3>Where predictions help</h3><p>High-probability sessions can support personalized offers, remarketing and sales prioritization.</p></article>
+        <article class="insight-card"><b>ENGAGEMENT</b><h3>Browsing behavior</h3><p>Page views and time spent can help explain how visitors interact with the store.</p></article>
+        <article class="insight-card"><b>CONVERSION</b><h3>Visitor type</h3><p>Compare observed purchase rates among new, returning and other visitors.</p></article>
+        <article class="insight-card"><b>SESSIONS</b><h3>Exit and bounce rates</h3><p>Review session exit behavior to identify possible opportunities to improve the shopping journey.</p></article>
+        <article class="insight-card"><b>DECISIONS</b><h3>Prediction support</h3><p>Use model probabilities as decision support, not as a guarantee that a visitor will purchase.</p></article>
       </div>
     </section>
 
-    <footer> E-Commerce Customer Behavior & Purchase Prediction · Internship Project</footer>
+    <footer> E-Commerce Customer Behavior & Purchase Prediction · UCI Public Dataset</footer>
   </main>
-
   <script src="script.js"></script>
 </body>
 </html>
